@@ -22,12 +22,7 @@ cd INAEB
 venv/Scripts/activate
 ```
 
-4 - Instale os requerimentos:
-```bash
-pip install -r requirements.txt
-```
-
-5 - Inicie o servidor:
+4 - Inicie o servidor:
 ```bash
 py manage.py runserver
 ```
