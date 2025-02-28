@@ -1,0 +1,4 @@
+VERSÃO 1.0 - 28/02/25
+
+> Sistema e super usuário criados.
+> Homepage simples.
