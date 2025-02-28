@@ -19,7 +19,7 @@ venv/Scripts/activate
 
 3 - Instale os requerimentos:
 ```bash
-pip install requirements.txt
+pip install -r requirements.txt
 ```
 
 4 - Inicie o servidor:
