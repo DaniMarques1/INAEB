@@ -12,7 +12,7 @@ Desenvolver um sistema eficiente para o controle dos itens doados e seu direcion
 git clone git@github.com:DaniMarques1/INAEB.git
 ```
 
-2 - Ative o venv(Virtual Environment):
+2 - Ative o venv (Virtual Environment):
 ```bash
 venv/Scripts/activate
 ```
