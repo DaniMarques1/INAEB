@@ -9,7 +9,7 @@ Desenvolver um sistema eficiente para o controle dos itens doados e seu direcion
 
 1 - Copie o repositório git:
 ```bash
-git clone git@github.com:DaniMarques1/INAEB.git
+git clone https://github.com/DaniMarques1/INAEB.git
 ```
 
 2 - Acesse a pasta:
