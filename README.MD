@@ -5,7 +5,7 @@ Desenvolver um sistema eficiente para o controle dos itens doados e seu direcion
 
 ----------------------------------------------------------
 
-### Como usar
+### Como instalar:
 
 1 - Copie o repositório git:
 ```bash
@@ -17,12 +17,22 @@ git clone https://github.com/DaniMarques1/INAEB.git
 cd INAEB
 ```
 
-3 - Ative o venv (Virtual Environment):
+3 - Crie o venv (Virtual Environment):
+```bash
+py -m venv venv
+```
+
+4 - Ative o venv:
 ```bash
 venv/Scripts/activate
 ```
 
-4 - Inicie o servidor:
+5 - Instale os requerimentos (requirements.txt)
+```bash
+pip install -r requirements.txt
+```
+
+6 - Inicie o servidor:
 ```bash
 py manage.py runserver
 ```
