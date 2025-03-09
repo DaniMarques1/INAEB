@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" typer="css">
+    <title>Home</title>
+</head>
+<body>
+    {% include 'includes/nav.html' %}
+    <div class="main-container">
+        <div class="main-column-1"></div>
+        <div class="main-column-2">
+            <span style="display: block; text-align: center;">INAEB - Sistema de Gerenciamento de Doações<br>Menu</span>
+        </div>
+        <div class="main-column-3"></div>
+    </div>
+</body>
+</html>

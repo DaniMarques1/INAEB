@@ -1,0 +1,23 @@
+<header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'menu' %}">Menu</a></li>
+            <li><a href="{% url 'cadastro_cestas' %}">Cestas</a></li>
+            <li><a href="{% url 'cadastro_familias' %}">Famílias</a></li>
+            <li><a href="{% url 'cadastro_produtos' %}">Produtos</a></li>
+            
+            {% if user.is_authenticated %}
+            <li>
+                Autenticado como '{{ user.username }}'
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+            </li>
+            {% else %}
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+            
+        </ul>
+    </nav>
+</header>

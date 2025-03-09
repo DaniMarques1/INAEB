@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'img/favicon.ico' %}" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" typer="css">
+    <title>Home</title>
+</head>
+<body>
+    {% include 'includes/nav.html' %}
+    <div class="main-container">
+        <div class="main-column-1"></div>
+        <div class="main-column-2">
+            <div style="width: 500px; margin: 0 auto;">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <div>
+                        <label for="id_username">Uuário:</label><br>
+                        <input type="text" name="username" id="id_username" required/>
+                    </div>
+        
+                    <div style="margin-top: 10px;">
+                        <label for="id_password">Senha:</label><br>
+                        <input type="password" name="password" id="id_password" required/>
+                    </div>
+        
+                    <div style="margin-top: 15px;">
+                        <button type="submit">Login</button>
+                    </div>
+                </form>
+                    {% if messages %}
+                        <br>
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
+        </div>
+        <div class="main-column-3"></div>
+    </div>
+</body>
+</html>
