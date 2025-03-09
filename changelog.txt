@@ -2,3 +2,8 @@ VERSÃO 1.0 - 28/02/25
 
 > Sistema e super usuário criados.
 > Homepage simples.
+
+VERSÃO 1.1 - 09/03/25
+
+> Criadas as páginas 'Login', 'Menu', 'Cadastro de Cestas', 'Cadastro de Famílias' e 'Cadastro de Produtos'.
+> Adicionado sistema de páginas protegidas por login.
