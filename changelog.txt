@@ -7,3 +7,8 @@ VERSÃO 1.1 - 09/03/25
 
 > Criadas as páginas 'Login', 'Menu', 'Cadastro de Cestas', 'Cadastro de Famílias' e 'Cadastro de Produtos'.
 > Adicionado sistema de páginas protegidas por login.
+
+VERSÃO 1.2 - 16/03/25
+
+> Adição de outras páginas ao sistema, como lista de famílias, formulário de cadastro de famílias e lista de entregas.
+> Preparação para branch de trabalho mútuo.
