@@ -9,6 +9,8 @@ urlpatterns = [
     
     path("menu/", menu, name="menu"),
     path("cadastro/cestas/", cadastro_cestas, name="cadastro_cestas"),
-    path("cadastro/familias/", cadastro_familias, name="cadastro_familias"),
-    path("cadastro/produtos/", cadastro_produtos, name="cadastro_produtos"),
+    path("cadastro/lista_familias/", lista_familias, name="lista_familias"),
+    path("cadastro/formulario_familias/", formulario_familias, name="formulario_familias"),
+    path("cadastro/entregas/", entregas, name="cadastro_entregas"),
+    path("cadastro/lista_entregas/", lista_entregas, name="lista_entregas"),
 ]

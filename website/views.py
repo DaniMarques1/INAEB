@@ -4,10 +4,6 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
-def redirect_to_menu(request):
-    """Redirect root URL to /menu."""
-    return redirect("menu")
-
 def login_view(request):
     if request.user.is_authenticated:
         return redirect('menu')
@@ -27,6 +23,10 @@ def login_view(request):
     
     return render(request, 'login.html')
 
+def redirect_to_menu(request):
+    """Redirect root URL to /menu."""
+    return redirect("menu")
+
 # @login_required(login_url='/login/')
 def menu(request):
     return render(request, "menu.html")
@@ -36,9 +36,17 @@ def cadastro_cestas(request):
     return render(request, "cadastro_cestas.html")
 
 # @login_required(login_url='/login/')
-def cadastro_familias(request):
-    return render(request, "cadastro_familias.html")
+def lista_familias(request):
+    return render(request, "lista_familias.html")
 
 # @login_required(login_url='/login/')
-def cadastro_produtos(request):
-    return render(request, "cadastro_produtos.html")
+def lista_entregas(request):
+    return render(request, "lista_entregas.html")
+
+# @login_required(login_url='/login/')
+def formulario_familias(request):
+    return render(request, "formulario_familias.html")
+
+# @login_required(login_url='/login/')
+def entregas(request):
+    return render(request, "cadastro_entregas.html")
