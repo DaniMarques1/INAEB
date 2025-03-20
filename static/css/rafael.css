@@ -1,0 +1,105 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+/* Fundo com gradiente */
+body {
+    background: linear-gradient(to bottom, #56CCF2, #E3F2FD);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container do login */
+.login-container {
+    text-align: center;
+    background: #F4F6F8;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 490px;
+    
+}
+
+/* Título principal */
+.title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Logo */
+.logo img {
+    width: 100px;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* Texto "LOGIN" abaixo do logotipo */
+.login-text {
+    font-size: 35px;
+    font-weight: 300; 
+    color: #A0A0A0;
+    margin-bottom: 15px;
+}
+
+/* Caixa de login */
+.login-box {
+    margin-top: 10px;
+    margin-bottom: 40px;
+}
+
+/* Campos de entrada */
+.input-group {
+    display: flex;
+    align-items: center;
+    background-color: #FFFFFF;
+    width: 300px;  
+    height: 45px;  
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px auto;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Ícone dentro dos inputs */
+.input-group .icon {
+    font-size: 18px;
+    margin-right: 10px;
+    color: #757575;
+}
+
+/* Estilização do Input */
+.input-group input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex: 1;
+    font-size: 16px;
+    width: calc(100% - 30px);
+    height: 100%;
+}
+
+/* Botão de Login */
+.login-button {
+    width: 300px; 
+    height: 45px;  
+    background: #2F80ED;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+/* Efeito hover no botão */
+.login-button:hover {
+    background: #1a4f80;
+}
