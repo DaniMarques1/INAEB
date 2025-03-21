@@ -10,7 +10,7 @@
       <li>
         <a href="{% url 'cadastro_cestas' %}">
         <img src="{% static 'img/cadastro_produtos.png' %}" alt="Cestas" />
-        <span>Cadastro de Cestas</span>
+        <h2>Cestas</h2>
         </a>
       </li>
       
@@ -18,7 +18,7 @@
       <li>
         <a href="{% url 'lista_familias' %}">
         <img src="{% static 'img/familia.png' %}" alt="Famílias" />
-        <span>Cadastro de Famílias</span>
+        <h2>Famílias</h2>
         </a>
         <ul class="dropdown">
           <li><a href="{% url 'lista_familias' %}">Lista de Famílias</a></li>
@@ -29,7 +29,7 @@
       <li>
         <a href="{% url 'lista_entregas' %}">
         <img src="{% static 'img/doacao.png' %}" alt="Entregas" />
-        <span>Cadastro de Entregas</span>
+        <h2>Entregas</h2>
         </a>
         <ul class="dropdown">
           <li><a href="{% url 'lista_entregas' %}">Lista de Entregas</a></li>
@@ -44,7 +44,7 @@
           {{ user.username }}
           <form action="{% url 'logout' %}" method="post" style="display: inline;">
               {% csrf_token %}
-              <button type="submit">Logout</button>
+              <button type="submit" class="logout-button">Logout</button>
           </form>
       {% else %}
       <a href="{% url 'login' %}">Login</a>

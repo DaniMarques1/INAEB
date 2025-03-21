@@ -4,8 +4,62 @@
 <head>
     {% include 'includes/headers.html' %}
     <title>Menu</title>
+    <link rel="stylesheet" href="{% static 'css\murilo.css' %}">
 </head>
 <body>
-    {% include 'includes/test_nav.html' %}
+    <header>
+        <div class="logo">
+            <img src="{% static 'img/logo.jpg' %}" alt="Logo INAEB">
+        </div>
+        <h1>Sistema de Gerenciamento de Estoque - INAEB</h1>
+        <div class="user-info">
+            <!-- Área para informações do usuário, se necessário -->
+        </div>
+        <div class="logout-container">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <img src="{% static 'img/icone_login2.png' %}" alt="User" class="user-icon" />
+            {% if user.is_authenticated %}
+                {{ user.username }}
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button class="logout-button" type="submit">Logout</button>
+                </form>
+            {% else %}
+            <a href="{% url 'login' %}">Login</a>
+            {% endif %}
+        </div>
+    </header>
+
+    <main>
+        <!-- Cartão de Cadastro de Cestas -->
+        <div class="card">
+            <img src="{% static 'img/cadastro_produtos.png' %}" alt="Imagem de Cadastro de Cestas">
+            <h2>Cadastro de Cestas</h2>
+            <div class="button-container">
+                <a href="{% url 'cadastro_cestas' %}"><button class="blue">Cadastrar Cesta(s)</button></a>
+            </div>
+        </div>
+
+        <!-- Cartão de Entregas -->
+        <div class="card">
+            <img src="{% static 'img/doacao.png' %}" alt="Imagem de Entregas">
+            <h2>Entregas</h2>
+            <div class="button-container">
+                <a href="{% url 'lista_entregas' %}"><button class="green">Lista de Entregas</button></a>
+                <a href="{% url 'cadastro_entregas' %}"><button class="blue">Cadastrar Entrega</button></a>
+            </div>
+        </div>
+
+        <!-- Cartão de Cadastro de Famílias -->
+        <div class="card">
+            <img src="{% static 'img/familia.png' %}" alt="Imagem de Cadastro de Famílias">
+            <h2>Cadastro de Famílias</h2>
+            <div class="button-container">
+                <a href="{% url 'lista_familias' %}"><button class="green">Lista de Famílias</button></a>
+                <a href="{% url 'formulario_familias' %}"><button class="blue">Cadastrar Família</button></a>
+            </div>
+        </div>
+
+    </main>
 </body>
 </html>
