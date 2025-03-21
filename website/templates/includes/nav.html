@@ -1,24 +1,44 @@
-<header>
-    <nav>
-        <ul>
-            <li><a href="{% url 'menu' %}">Menu</a></li>
-            <li><a href="{% url 'cadastro_cestas' %}">Cestas</a></li>
-            <li><a href="{% url 'lista_familias' %}">Famílias</a></li>
-            <li><a href="{% url 'lista_entregas' %}">Entregas</a></li>
-            <li><a href="{% url 'formulario_familias' %}">Formulário de Cadastro</a></li>
-            <li><a href="{% url 'cadastro_entregas' %}">Cadastro de Entregas</a></li>
-            {% if user.is_authenticated %}
-            <li>
-                Autenticado como '{{ user.username }}'
-                <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <button type="submit">Logout</button>
-                </form>
-            </li>
-            {% else %}
-            <li><a href="{% url 'login' %}">Login</a></li>
-            {% endif %}
-            
-        </ul>
-    </nav>
-</header>
+{% load static %}
+<nav class="nav">
+    <div class="nav-left">
+      <a href="{% url 'menu' %}">
+      <img src="{% static 'img/logo.jpg' %}" alt="Logo" class="logo" />
+      </a>
+    </div>
+
+    <ul class="nav-items">
+      <li>
+        <a href="{% url 'cadastro_cestas' %}">
+        <img src="{% static 'img/cadastro_produtos.png' %}" alt="Candidatos" />
+        <span>Cadastro de Cestas</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="{% url 'lista_familias' %}">
+        <img src="{% static 'img/familia.png' %}" alt="Famílias" />
+        <span>Cadastro de Famílias</span>
+        </a>
+      </li>
+      
+      <li>
+        <a href="{% url 'lista_entregas' %}">
+        <img src="{% static 'img/doacao.png' %}" alt="Empresas" />
+        <span>Entregas</span>
+        </a>
+      </li>
+    </ul>
+
+    <div class="nav-right">
+      <img src="{% static 'img/icone_login2.png' %}" alt="User" class="user-icon" />
+      {% if user.is_authenticated %}
+          {{ user.username }}
+          <form action="{% url 'logout' %}" method="post" style="display: inline;">
+              {% csrf_token %}
+              <button type="submit">Logout</button>
+          </form>
+      {% else %}
+      <a href="{% url 'login' %}">Login</a>
+      {% endif %}
+    </div>
+  </nav>
