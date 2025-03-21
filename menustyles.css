@@ -1,0 +1,156 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* Fundo e alinhamento geral */
+body {
+    background-color: #f4f6fb;
+    text-align: center;
+    padding: 20px;
+}
+
+/* Estilização do cabeçalho */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajuste do logo */
+.logo img {
+    width: 60px;
+    height: auto;
+}
+
+/* Área de usuário */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* Contêiner do logout */
+.logout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.logout-container i {
+    font-size: 24px;
+    color: #555; /* Cinza escuro */
+    cursor: pointer;
+}
+
+/* Botão de logout */
+.logout-button {
+    background-color: #555; /* Cinza escuro */
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Área principal */
+main {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 90%;
+    margin: 40px auto;
+    flex-wrap: wrap;
+}
+
+/* Cartões */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Alinha o conteúdo verticalmente */
+    min-height: 400px; /* Altura mínima para todos os cartões */
+}
+
+/* Ajuste do tamanho das imagens */
+.card img {
+    width: auto;
+    max-width: 200px;
+    height: 140px;
+    object-fit: contain;
+    margin-bottom: 15px;
+}
+
+/* Títulos dos cartões */
+.card h2 {
+    margin-bottom: 20px; /* Espaçamento abaixo do título */
+    height: 60px; /* Altura fixa para os títulos */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Garante que o título ocupe toda a largura */
+}
+
+/* Botões */
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.green {
+    background-color: green;
+    color: white;
+}
+
+.blue {
+    background-color: blue;
+    color: white;
+}
+
+/* Ajuste para garantir que os botões fiquem alinhados */
+.card .button-container {
+    width: 100%;
+    margin-top: auto; /* Empurra os botões para a base do cartão */
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .card {
+        width: 90%;
+        max-width: 350px;
+    }
+}
