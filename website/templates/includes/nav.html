@@ -9,23 +9,32 @@
     <ul class="nav-items">
       <li>
         <a href="{% url 'cadastro_cestas' %}">
-        <img src="{% static 'img/cadastro_produtos.png' %}" alt="Candidatos" />
+        <img src="{% static 'img/cadastro_produtos.png' %}" alt="Cestas" />
         <span>Cadastro de Cestas</span>
         </a>
       </li>
+      
 
       <li>
         <a href="{% url 'lista_familias' %}">
         <img src="{% static 'img/familia.png' %}" alt="Famílias" />
         <span>Cadastro de Famílias</span>
         </a>
+        <ul class="dropdown">
+          <li><a href="{% url 'lista_familias' %}">Lista de Famílias</a></li>
+          <li><a href="{% url 'formulario_familias' %}">Cadastrar Família</a></li>
+        </ul>
       </li>
       
       <li>
         <a href="{% url 'lista_entregas' %}">
-        <img src="{% static 'img/doacao.png' %}" alt="Empresas" />
-        <span>Entregas</span>
+        <img src="{% static 'img/doacao.png' %}" alt="Entregas" />
+        <span>Cadastro de Entregas</span>
         </a>
+        <ul class="dropdown">
+          <li><a href="{% url 'lista_entregas' %}">Lista de Entregas</a></li>
+          <li><a href="{% url 'cadastro_entregas' %}">Cadastrar Entrega</a></li>
+        </ul>
       </li>
     </ul>
 
@@ -41,4 +50,4 @@
       <a href="{% url 'login' %}">Login</a>
       {% endif %}
     </div>
-  </nav>
+</nav>
