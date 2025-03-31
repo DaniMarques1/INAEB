@@ -129,11 +129,13 @@ button {
 .green {
     background-color: green;
     color: white;
+    text-decoration: none !important;
 }
 
 .blue {
     background-color: blue;
     color: white;
+    text-decoration: none !important;
 }
 
 /* Ajuste para garantir que os botões fiquem alinhados */
@@ -141,6 +143,14 @@ button {
     width: 100%;
     margin-top: auto; /* Empurra os botões para a base do cartão */
 }
+
+.button-container a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+  }
 
 /* Responsividade */
 @media (max-width: 1024px) {
