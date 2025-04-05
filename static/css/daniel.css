@@ -168,6 +168,155 @@ body {
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  display: flex;                  
+  flex-direction: column;
+  overflow: auto;                 
 }
 
+.right-column-content{
+  padding-right: 3rem;
+  padding-left: 3rem;
+  text-align: center; 
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  flex: 1;
+  display: flex; 
+}
 
+.right-column-buttons-1{
+  flex: 0.25;
+  display: flex; 
+  flex-direction: column;
+  height: 100%;
+}
+
+.buttons-1-row-1{
+  flex: 1;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 3vw;
+}
+
+.buttons-1-row-2{
+  flex: 1;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 3vw;
+}
+
+.button-register-1 {
+  display: inline-block;
+  background-color: #5C90D2; 
+  color: #ffffff;
+  width: 240px;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  align-content: center;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.button-register-1:hover {
+  background-color: #4C7EC4; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-register-1:focus,
+.button-register-1:active {
+  outline: none; 
+  background-color: #3B6A9E; 
+}
+
+.button-info-1 {
+  display: inline-block;
+  background-color: #EFF3F9; 
+  color: #000000;
+  width: 240px;
+  height: 50px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  align-content: center;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  font-weight: bold;
+}
+
+.button-info-1:hover {
+  background-color: #e1e6ee; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button-info-1:focus,
+.button-info-1:active {
+  outline: none; 
+  background-color: #afb9c5; 
+}
+
+.green-button{
+  background-color: rgb(55, 192, 42);
+}
+
+.red-button{
+  background-color: rgb(197, 78, 78);
+}
+
+.orange-button{
+  background-color: rgb(224, 159, 75);
+}
+
+.right-column-list-1{
+  flex: 0.75;
+  border-radius: 16px;
+  background-color: #EFF3F9;
+}
+
+.table-container {
+  width: 98%;
+  max-height: 500px; 
+  overflow: auto;
+  border: 1px solid #000; 
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 16px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  border: 1px solid #000; 
+  padding: 10px;
+  text-align: center;
+}
+
+table th {
+  background-color: rgb(100, 162, 204);
+  color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0; 
+  z-index: 2; 
+}
+
+.title {
+  font-weight: bold;
+}

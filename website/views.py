@@ -37,7 +37,10 @@ def cadastro_cestas(request):
 
 # @login_required(login_url='/login/')
 def lista_familias(request):
-    return render(request, "lista_familias.html")
+    context = {
+        'range': range(20)  # This creates a list of integers from 0 to 19
+    }
+    return render(request, "lista_familias.html", context)
 
 # @login_required(login_url='/login/')
 def lista_entregas(request):

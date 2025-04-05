@@ -18,8 +18,60 @@
     </div>
 
     <div class="right-column">
-        <p>Botões de Cadastro/Totais</p>
-        <p>Lista de Famílias</p>
+        <div class="right-column-content">
+            <div class="right-column-buttons-1">
+                <div class="buttons-1-row-1">
+                    <div class="button-register-1">
+                        + Cadastrar Família
+                    </div>
+                </div>
+                <div class="buttons-1-row-2">
+                    <div class="button-info-1">
+                        Famílias Ativas: 33
+                    </div>
+                    <div class="button-info-1">
+                        Famílias Aguardando: 3
+                    </div>
+                    <div class="button-info-1">
+                        Famílias Suspensas: 9
+                    </div>
+                </div>
+            </div>
+            <div class="right-column-list-1"> 
+
+            <h1>Lista de Famílias</h1>
+            <div class="table-container">
+                <table>
+                <thead>
+                    <tr>
+                    <th>Responsável</th>
+                    <th>Editar</th>
+                    <th>Nascimento</th>
+                    <th>Membros</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                    <th>Status</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    {% for number in range %}
+                    <tr>
+                    <td>Fulano da Silva Santos</td>
+                    <td>📋</td>
+                    <td>20/05/1990</td>
+                    <td>6</td>
+                    <td>Rua Marcilio Conrado nº98, Riacho Grande - SBC - SP - 09880-020</td>
+                    <td>98888-8888</td>
+                    <td>Ativa</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+                
+                </table>
+            </div>
+            </div>
+        </div>
     </div>
 
 </div>
