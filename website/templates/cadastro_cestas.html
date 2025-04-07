@@ -18,8 +18,42 @@
     </div>
 
     <div class="right-column">
-        <p>Cadastro das Cestas/Total</p>
-        <p>Lista de Itens da Cesta</p>
+        <div class="right-column-content">
+            <div class="right-column-buttons-2">
+                <h1>Cestas Básicas Cadastradas: 30</h1>
+                <div class="buttons-2-row">
+                    <img class="cesta-img" src="{% static 'img/cesta.png' %}" alt="Example" />
+                </div>
+                <div class="buttons-2-row">
+                    <img class="icon-img" src="{% static 'img/minus.png' %}" alt="minus" />
+                    <h2>2</h2>
+                    <img class="icon-img" src="{% static 'img/plus.png' %}" alt="minus" />
+                </div>
+                <div class="buttons-2-row">
+                    <div class="button-register-1">
+                        + Cadastrar Cesta(s)
+                    </div>
+                </div>
+            </div>
+            <div class="right-column-list-2">
+                <h1>Itens da Cesta Básica</h1>
+                <div class="right-column-list-2-cards">
+                    {% for number in range %}
+                    <div class="card">
+                        <div class="card-row">
+                            <h3>Feijão</h3>
+                        </div>
+                        <div class="card-row">
+                            <img class="produto-img" src="{% static 'img/feijao.jpg' %}" alt="Example" />
+                        </div>
+                        <div class="card-row">
+                            5
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>

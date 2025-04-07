@@ -33,12 +33,15 @@ def menu(request):
 
 # @login_required(login_url='/login/')
 def cadastro_cestas(request):
-    return render(request, "cadastro_cestas.html")
+    context = {
+        'range': range(30)
+    }
+    return render(request, "cadastro_cestas.html", context)
 
 # @login_required(login_url='/login/')
 def lista_familias(request):
     context = {
-        'range': range(20)  # This creates a list of integers from 0 to 19
+        'range': range(20)
     }
     return render(request, "lista_familias.html", context)
 

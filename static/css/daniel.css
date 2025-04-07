@@ -11,6 +11,10 @@ body {
   background: #EFF3F9;
   flex-direction: column;
 }
+
+h1{
+  margin: 5px;
+}
 /* ---------------------------------- NAVBAR ----------------------------------  */  
 
 /* Nav container */
@@ -184,6 +188,8 @@ body {
   display: flex; 
 }
 
+/* ---------- LISTA DE FAMÍLIAS ----------  */ 
+
 .right-column-buttons-1{
   flex: 0.25;
   display: flex; 
@@ -191,16 +197,7 @@ body {
   height: 100%;
 }
 
-.buttons-1-row-1{
-  flex: 1;
-  display: flex; 
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  gap: 3vw;
-}
-
-.buttons-1-row-2{
+.buttons-1-row {
   flex: 1;
   display: flex; 
   align-items: center;
@@ -319,4 +316,85 @@ table th {
 
 .title {
   font-weight: bold;
+}
+
+/* ---------- CADASTRO DE CESTAS ----------  */ 
+
+.right-column-buttons-2{
+  flex: 0.45;
+  display: flex; 
+  flex-direction: column;
+  border-radius: 16px;
+  background-color: #EFF3F9;
+  height: 100%;
+  margin: 5px;
+}
+
+.right-column-list-2{
+  flex: 0.55;
+  display: flex; 
+  flex-direction: column;
+  border-radius: 16px;
+  background-color: #EFF3F9;
+  height: 100%;
+  width: 100%;
+  margin: 5px;
+  border-collapse: collapse;
+  overflow: auto;
+}
+
+.buttons-2-row {
+  flex: 1;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 1vw;
+}
+
+.cesta-img {
+  width: 120px;
+  height: 120px;
+}
+
+.icon-img {
+  width: 32px;   
+  height: 32px; 
+}
+
+.produto-img {
+  width: 64px;   
+  height: 64px; 
+}
+
+.icon-img:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.right-column-list-2-cards{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 150px);
+  flex-direction: column;
+  margin: 5px;
+  gap: 2vw;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  justify-content: center;
+}
+
+.card {
+  width: 150px;
+  position: relative;
+  border: 3px solid;
+  border-radius: 16px;
+  border-color: #000;
+}
+
+.card-row {
+  padding-bottom: 4px;
+  padding-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
