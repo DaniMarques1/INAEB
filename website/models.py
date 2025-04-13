@@ -13,7 +13,7 @@ class Familia(models.Model):
     despesa_apro = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
 
     # Endereço
-    endereco = models.CharField(max_length=50, null=True, blank=True)
+    endereco = models.CharField(max_length=50)
     bairro = models.CharField(max_length=50, null=True, blank=True)
     cidade = models.CharField(max_length=50, null=True, blank=True)
     cep = models.CharField(max_length=9, null=True, blank=True)

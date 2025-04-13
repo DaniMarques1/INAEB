@@ -47,7 +47,16 @@ def cadastro_cestas(request):
 
 # @login_required(login_url='/login/')
 def lista_familias(request):
+    order_field = request.GET.get('order_by', 'nome')
+
+    valid_fields = ['nome', 'data_nascimento', '-nome', '-data_nascimento']
+    if order_field not in valid_fields:
+        order_field = 'nome'
+        
+    dados_familia = Familia.objects.all().order_by(order_field)
+
     context = {
+        'dados_familia': dados_familia,
         'range': range(20)
     }
     return render(request, "lista_familias.html", context)

@@ -44,9 +44,9 @@
                 <table>
                 <thead>
                     <tr>
-                    <th>Responsável</th>
-                    <th>Editar</th>
-                    <th>Nascimento</th>
+                    <th></th>
+                    <th>Responsável <a href="?order_by=nome">🔺</a> <a href="?order_by=-nome">🔻</a></th>
+                    <th>Nascimento <a href="?order_by=data_nascimento">🔺</a> <a href="?order_by=-data_nascimento">🔻</a></th>
                     <th>Membros</th>
                     <th>Endereço</th>
                     <th>Telefone</th>
@@ -55,15 +55,15 @@
                 </thead>
                 
                 <tbody>
-                    {% for number in range %}
+                    {% for registro in dados_familia %}
                     <tr>
-                    <td>Fulano da Silva Santos</td>
                     <td>📋</td>
-                    <td>20/05/1990</td>
+                    <td>{{ registro.nome }}</td>
+                    <td>{{ registro.data_nascimento|date:"d/m/Y" }}</td>
                     <td>6</td>
-                    <td>Rua Marcilio Conrado nº98, Riacho Grande - SBC - SP - 09880-020</td>
+                    <td>{{ registro.endereco }}</td>
                     <td>98888-8888</td>
-                    <td>Ativa</td>
+                    <td>{{ registro.status_atendimento }}</td>
                     </tr>
                     {% endfor %}
                 </tbody>
