@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import dotenv
+import os
 
 dotenv.load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -127,3 +128,9 @@ STATICFILES_DIRS = [BASE_DIR / "static"]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/menu/'
+
+# URL para acessar arquivos de mídia (imagens, PDFs, etc.) via browser
+MEDIA_URL = '/media/'
+
+# Caminho no sistema de arquivos onde os uploads serão armazenados
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

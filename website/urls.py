@@ -13,4 +13,6 @@ urlpatterns = [
     path("cadastro/formulario_familias/", formulario_familias, name="formulario_familias"),
     path("cadastro/entregas/", entregas, name="cadastro_entregas"),
     path("cadastro/lista_entregas/", lista_entregas, name="lista_entregas"),
+
+    path('atualizar_cestas/', atualizar_cestas, name='atualizar_cestas'),
 ]
