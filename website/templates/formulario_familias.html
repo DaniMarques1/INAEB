@@ -1,26 +1,227 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     {% include 'includes/headers.html' %}
-    <link rel="stylesheet" href="{% static 'css/daniel.css' %}" typer="css">
+    <link rel="stylesheet" href="{% static 'css/daniel.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/murilo.css' %}" type="text/css">
     <title>Formulário de Cadastro das Famílias</title>
 </head>
 <body>
 {% include 'includes/nav.html' %}
 <div class="main-container">
-
     <div class="left-column">
         <div class="left-column-content">
-        <img src="{% static 'img/familia.png' %}" alt="Example" />
-        <h3>Formulário de Cadastro das Famílias</h3>
+            <img src="{% static 'img/familia.png' %}" alt="Família" />
+            <h3>Formulário de Cadastro das Famílias</h3>
         </div>
     </div>
 
-    <div class="right-column">
-        <p>Formulário de Cadastro das Famílias</p>
-    </div>
+    <div class="right-column family-form">
+        <div class="form-container">
+            <h1>Formulário de Inscrição</h1>
+            <h2>Dados do Responsável</h2>
 
+            <div class="form-section">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input type="text" id="nome" name="nome">
+                    </div>
+                    <div class="form-group">
+                        <label for="rg">RG</label>
+                        <input type="text" id="rg" name="rg">
+                    </div>
+                    <div class="form-group">
+                        <label for="cpp">CPF</label>
+                        <input type="text" id="cpp" name="cpp">
+                    </div>
+                    <div class="form-group">
+                        <label for="datadenascimento">Data nascimento</label>
+                        <input type="text" id="datadenascimento" name="datadenascimento">
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="receita">Receita aproximada</label>
+                        <input type="text" id="receita" name="receita">
+                    </div>
+                    <div class="form-group">
+                        <label for="despesa">Despesa aproximada</label>
+                        <input type="text" id="despesa" name="despesa">
+                    </div>
+                    <div class="form-group">
+                        <label for="telefone">Telefone</label>
+                        <input type="text" id="telefone" name="telefone">
+                    </div>
+                    <div class="form-group">
+                        <label for="obs">OBS</label>
+                        <input type="text" id="obs" name="obs">
+                    </div>
+                </div>
+
+                <h2>Endereço</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="endereco">Endereço - Nº de Casa</label>
+                        <input type="text" id="endereco" name="endereco">
+                    </div>
+                    <div class="form-group">
+                        <label for="bairro">Bairro</label>
+                        <input type="text" id="bairro" name="bairro">
+                    </div>
+                    <div class="form-group">
+                        <label for="cidade">Cidade</label>
+                        <input type="text" id="cidade" name="cidade">
+                    </div>
+                    <div class="form-group">
+                        <label for="cep">CEP</label>
+                        <input type="text" id="cep" name="cep">
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="pontodereferencia">Ponto de referência</label>
+                        <input type="text" id="pontodereferencia" name="pontodereferencia">
+                    </div>
+                    <div class="form-group">
+                        <label for="complemento">Complemento</label>
+                        <input type="text" id="complemento" name="complemento">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Familiar</h2>
+                <div class="form-grid familiar-grid">
+                    <div class="form-group"><label>Nome</label><input type="text"></div>
+                    <div class="form-group"><label>Nascimento</label><input type="text"></div>
+                    <div class="form-group"><label>Parentesco</label><input type="text"></div>
+                    <div class="form-group"><label>Escolaridade/Instrução</label><input type="text"></div>
+                    <div class="form-group"><label>Profissão</label><input type="text"></div>
+                    <div class="form-group"><label>Ocupação</label><input type="text"></div>
+                    <div class="form-group full-width"><button type="button" class="add-familiar">➕ Adicionar Familiar</button></div>
+                </div>
+
+                <h2>Familiar 'N'</h2>
+                <div class="form-grid familiar-grid">
+                    <div class="form-group"><label>Nome</label><input type="text"></div>
+                    <div class="form-group"><label>Nascimento</label><input type="text"></div>
+                    <div class="form-group"><label>Parentesco</label><input type="text"></div>
+                    <div class="form-group"><label>Escolaridade/Instrução</label><input type="text"></div>
+                    <div class="form-group"><label>Profissão</label><input type="text"></div>
+                    <div class="form-group"><label>Ocupação</label><input type="text"></div>
+                    <div class="form-group full-width"><button type="button" class="add-familiar">➕ Adicionar Familiar</button></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Status da família</h2>
+                <div class="status-options">
+                    <label><input type="radio" name="status" value="ativa"> Ativa</label>
+                    <label><input type="radio" name="status" value="suspensa"> Suspensa</label>
+                    <label><input type="radio" name="status" value="aguardando"> Aguardando Vaga</label>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Questionário Sócio Econômico</h2>
+
+                <div class="checkbox-section">
+                    <label class="questionario-title">Lixo</label>
+                    <div class="checkbox-options">
+                        <label><input type="checkbox" name="lixo" value="queima"> Queima</label>
+                        <label><input type="checkbox" name="lixo" value="enterrar"> Enterra</label>
+                        <label><input type="checkbox" name="lixo" value="coleta"> Coleta</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-section">
+                    <label class="questionario-title">Água</label>
+                    <div class="checkbox-options">
+                        <label><input type="checkbox" name="agua" value="encanada"> Encanada</label>
+                        <label><input type="checkbox" name="agua" value="poco"> Poço</label>
+                        <label><input type="checkbox" name="agua" value="cisterna"> Cisterna</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-section">
+                    <label class="questionario-title">Esgoto</label>
+                    <div class="checkbox-options">
+                        <label><input type="checkbox" name="esgoto" value="rede"> Rede</label>
+                        <label><input type="checkbox" name="esgoto" value="fossa"> Fossa</label>
+                        <label><input type="checkbox" name="esgoto" value="ceuaberto"> Céu Aberto</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-section">
+                    <label class="questionario-title">Limpeza da Casa</label>
+                    <div class="checkbox-options">
+                        <label><input type="checkbox" name="limpeza" value="varre"> Varre</label>
+                        <label><input type="checkbox" name="limpeza" value="lava"> Lava</label>
+                        <label><input type="checkbox" name="limpeza" value="ambos"> Ambos</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-section">
+                    <label class="questionario-title">Moradia I</label>
+                    <div class="checkbox-options">
+                        <label><input type="checkbox" name="moradia" value="propria"> Própria</label>
+                        <label><input type="checkbox" name="moradia" value="alugada"> Alugada</label>
+                        <label><input type="checkbox" name="moradia" value="cedida"> Cedida</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-section">
+                    <label class="questionario-title">Moradia II</label>
+                    <div class="checkbox-options">
+                        <label><input type="checkbox" name="moradia" value="propria"> Numero de comodos</label>
+                        <label><input type="checkbox" name="moradia" value="alugada"> Numero de moradores</label>
+                        <label><input type="checkbox" name="moradia" value="cedida"> Banheiro externo</label>
+                        <label><input type="checkbox" name="moradia" value="cedida"> Banheiro interno</label>
+                    </div>
+                </div>
+
+
+
+                <div class="checkbox-section">
+                    <label class="questionario-title">Material de Construção</label>
+                    <div class="checkbox-options">
+                        <label><input type="checkbox" name="construcao" value="alvenaria"> Alvenaria</label>
+                        <label><input type="checkbox" name="construcao" value="taipa"> Taipa</label>
+                        <label><input type="checkbox" name="construcao" value="madeira"> Madeira</label>
+                    </div>
+                </div>
+
+                <div class="checkbox-section">
+                    <label class="questionario-title">Possui</label>
+                    <div class="checkbox-options">
+                        <label><input type="checkbox" name="diversos" value="geladeira"> Geladeira</label>
+                        <label><input type="checkbox" name="diversos" value="tv"> TV</label>
+                        <label><input type="checkbox" name="diversos" value="radio"> Rádio</label>
+                        <label><input type="checkbox" name="diversos" value="carro"> Carro</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="observacoes">Observações</label>
+                    <textarea id="observacoes" name="observacoes" placeholder="Digite aqui..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="observacoes_gerais">Observações Gerais</label>
+                    <textarea id="observacoes_gerais" name="observacoes_gerais" placeholder="Digite aqui..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">Salvar Cadastro</button>
+                <button type="reset" class="cancel-btn">Cancelar</button>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 </html>
