@@ -54,7 +54,7 @@ class Familia(models.Model):
     telefone_internet = models.BooleanField(null=True, blank=True)
 
     # Observações Gerais
-    obs_gerais = models.TextField(null=True, blank=True)
+    obs_gerais = models.TextField(max_length=2000, null=True, blank=True)
 
     def __str__(self):
         return self.nome or f"Família {self.pk}"
