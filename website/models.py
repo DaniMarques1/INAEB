@@ -2,15 +2,21 @@ from django.db import models
 
 class Familia(models.Model):
     # Django cria automaticamente o id como pk: id = models.AutoField(primary_key=True)
+    
+    # Status de atendimento da família
+    status_atendimento = models.CharField(max_length=20)
+    inicio_atendimento = models.DateField(null=True, blank=True)
+    termino_atendimento = models.DateField(null=True, blank=True)
 
-    data_entrevista = models.DateField()
     # Dados do Responsável
+    data_entrevista = models.DateField(null=True, blank=True)
     nome = models.CharField(max_length=50)
     rg = models.CharField(max_length=12)
     cpf = models.CharField(max_length=14)
     data_nascimento = models.DateField()
     receita_apro = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
     despesa_apro = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    obs_responsavel = models.CharField(max_length=50, null=True, blank=True)
 
     # Endereço
     endereco = models.CharField(max_length=50)
@@ -20,17 +26,15 @@ class Familia(models.Model):
     ponto_referencia = models.CharField(max_length=50, null=True, blank=True)
     complemento = models.CharField(max_length=50, null=True, blank=True)
 
-    # Status de atendimento da família
-    status_atendimento = models.CharField(max_length=20)
-    inicio_atendimento = models.DateField(null=True, blank=True)
-    termino_atendimento = models.DateField(null=True, blank=True)
+    # -------- QUESTIONÁRIO SÓCIO ECONÔMICO -------- #
+    data_visita = models.DateField(null=True, blank=True)
 
-    # Lixo e Limpeza da Casa
+    # Higiene do Ambiente
     lixo = models.CharField(max_length=50, null=True, blank=True)
     limpeza_casa = models.CharField(max_length=50, null=True, blank=True)
     obs_limpeza = models.CharField(max_length=2000, null=True, blank=True)
 
-    # Saneamento
+    # Saneamento Básico
     agua = models.CharField(max_length=50, null=True, blank=True)
     esgoto = models.CharField(max_length=50, null=True, blank=True)
     obs_esgoto = models.CharField(max_length=2000, null=True, blank=True)
@@ -70,6 +74,7 @@ class Parente(models.Model):
     familia = models.ForeignKey(Familia, on_delete=models.CASCADE)
 
     nome = models.CharField(max_length=50, null=True, blank=True)
+    data_nascimento = models.DateField(null=True, blank=True)
     parentesco = models.CharField(max_length=50, null=True, blank=True)
     instrucao = models.CharField(max_length=50, null=True, blank=True)
     profissao = models.CharField(max_length=20, null=True, blank=True)
