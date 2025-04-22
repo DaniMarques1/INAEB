@@ -7,6 +7,7 @@ class FamiliaAdmin(admin.ModelAdmin):
 
 @admin.register(Telefone)
 class TelefoneAdmin(admin.ModelAdmin):
+    list_display = ('familia', 'telefone')
     pass
 
 @admin.register(Parente)

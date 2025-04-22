@@ -27,6 +27,24 @@ button {
   font-size: 16px;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.msg {
+  margin: 20px;
+  font-weight: bold;
+}
+
+.sucesso {
+  color: green
+}
+
+.erro {
+  color: red
+}
+
 /* ---------------------------------- NAVBAR ----------------------------------  */  
 
 /* Nav container */
@@ -469,7 +487,7 @@ table th {
 
 .telefone{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
 }
 
 .status input{
@@ -547,10 +565,12 @@ table th {
   flex-direction: column;
   gap: 10px;
   padding-left: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .checkbox-options input {
-  max-width: 20px;
+  max-width: 35px;
 }
 
 .diversos{
@@ -601,6 +621,21 @@ table th {
   margin: 25px;
   gap: 20px;
   justify-content: center;
+}
+
+.radio-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;               /* espaço entre bolinha e texto */
+  cursor: pointer;
+  font-weight: 500;       /* opcional: deixa o rótulo mais forte */
+}
+
+/* bolinha maior + cor personalizada (navegadores modernos) */
+.status-options input[type="radio"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #007bff;  /* mude para a cor do seu tema */
 }
 
 /* =========================================== */

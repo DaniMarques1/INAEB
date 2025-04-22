@@ -22,7 +22,7 @@
             <div class="right-column-buttons-1">
                 <div class="buttons-1-row">
                     <div class="button-register-1">
-                        + Cadastrar Família
+                        <a href="{% url 'criar_familia' %}">+ Cadastrar Família</a>
                     </div>
                 </div>
                 <div class="buttons-1-row">
@@ -40,6 +40,13 @@
             <div class="right-column-list-1"> 
 
             <h1>Lista de Famílias</h1>
+            {% if messages %}
+            {% for message in messages %}
+              <div class="msg {% if message.tags == 'success' %}sucesso{% elif message.tags == 'error' %}erro{% endif %}">
+                {{ message }}
+              </div>
+            {% endfor %}
+            {% endif %}
             <div class="table-container">
                 <table>
                 <thead>
@@ -57,12 +64,12 @@
                 <tbody>
                     {% for registro in dados_familia %}
                     <tr>
-                    <td>📋</td>
+                    <td><a href="{{ registro.id }}/editar">📋</a></td>
                     <td>{{ registro.nome }}</td>
                     <td>{{ registro.data_nascimento|date:"d/m/Y" }}</td>
                     <td>6</td>
                     <td>{{ registro.endereco }}</td>
-                    <td>98888-8888</td>
+                    <td>{{ registro.telefone_set.all.0.telefone|default:"—" }}</td>
                     <td>{{ registro.status_atendimento }}</td>
                     </tr>
                     {% endfor %}

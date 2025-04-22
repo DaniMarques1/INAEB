@@ -19,23 +19,36 @@
 
     <div class="right-column family-form">
         <div class="form-container">
+            {% if messages %}
+            {% for message in messages %}
+              <div class="msg {% if message.tags == 'success' %}sucesso{% elif message.tags == 'error' %}erro{% endif %}">
+                {{ message }}
+              </div>
+            {% endfor %}
+            {% endif %}
 
+            <form method="post" novalidate>
+            {% csrf_token %}
             <div class="h1-form">Formulário de Inscrição </div>
+            {{ form.non_field_errors }}
             <div class="form-section">
                 <div class="h2-form">Status da família</div>
                 <div class="status-options">
-                    <label><input type="radio" name="status" value="ativa"> Ativa</label>
-                    <label><input type="radio" name="status" value="suspensa"> Suspensa</label>
-                    <label><input type="radio" name="status" value="aguardando"> Aguardando Vaga</label>
+                {% for radio in form.status_atendimento %}
+                    <label class="radio-item">
+                    {{ radio.tag }}
+                    <span>{{ radio.choice_label }}</span>
+                    </label>
+                 {% endfor %}
                 </div>
                 <div class="form-grid status">
                     <div class="form-group">
                         <label for="inicio_atendimento">Início do Atendimento</label>
-                        <input type="date">
+                        {{ form.inicio_atendimento }}
                     </div>
                     <div class="form-group">
                         <label for="termino_atendimento">Término do Atendimento</label>
-                        <input type="date">
+                        {{ form.termino_atendimento }}
                     </div>
                 </div>
             </div>
@@ -45,82 +58,91 @@
             <div class="form-grid entrevista">
                 <div class="form-group">
                     <label for="data_entrevista">Data da Entrevista</label>
-                    <input type="date">
+                    {{ form.data_entrevista }}
                 </div>
             </div>
 
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="nome">Nome</label>
-                        <input type="text" id="nome" name="nome">
+                        <label for="nome">Nome*</label>
+                        {{ form.nome }}
                     </div>
                     <div class="form-group">
-                        <label for="rg">RG</label>
-                        <input type="text" id="rg" name="rg">
+                        <label for="rg">RG*</label>
+                        {{ form.rg }}
                     </div>
                     <div class="form-group">
-                        <label for="cpf">CPF</label>
-                        <input type="text" id="cpf" name="cpf">
+                        <label for="cpf">CPF*</label>
+                        {{ form.cpf }}
                     </div>
                     <div class="form-group">
-                        <label for="datadenascimento">Data nascimento</label>
-                        <input type="date" id="datadenascimento" name="datadenascimento">
+                        <label for="data_nascimento">Data de Nascimento*</label>
+                        {{ form.data_nascimento}}
                     </div>
                 </div>
 
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="receita">Receita aproximada</label>
-                        <input type="text" id="receita" name="receita">
+                        <label for="receita_apro">Receita aproximada</label>
+                        {{ form.receita_apro }}
                     </div>
                     <div class="form-group">
-                        <label for="despesa">Despesa aproximada</label>
-                        <input type="text" id="despesa" name="despesa">
+                        <label for="despesa_apro">Despesa aproximada</label>
+                        {{ form.despesa_apro }}
                     </div>
                     <div class="form-group">
-                        <label for="obs">OBS</label>
-                        <input type="text" id="obs" name="obs">
+                        <label for="obs_responsavel">OBS</label>
+                        {{ form.obs_responsavel }}
                     </div>
                 </div>
 
+                {{ formset.management_form }}
                 <div class="form-grid telefone">
-                    <div class="form-group">
-                        <label for="telefone">Telefone 1</label>
-                        <input type="text" id="telefone" name="telefone">
-                    </div>
-                    <div class="form-group full-width">
-                        <button type="button" class="add-familiar">➕ Adicionar Telefone</button>
-                    </div>
+                    {% for telefone_form in formset %}
+                      {% for hidden in telefone_form.hidden_fields %}
+                        {{ hidden }}
+                      {% endfor %}
+                
+                      <div class="form-group">
+                        <label for="{{ telefone_form.telefone.id_for_label }}">
+                          Telefone {{ forloop.counter }}
+                        </label>
+                        {{ telefone_form.telefone }}
+                        {% if telefone_form.telefone.errors %}
+                          <div class="error">{{ telefone_form.telefone.errors }}</div>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
                 </div>
 
                 <div class="h2-form">Endereço</div class="h2-form">
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="endereco">Endereço - Nº de Casa</label>
-                        <input type="text" id="endereco" name="endereco">
+                        <label for="endereco">Endereço - Nº de Casa*</label>
+                        {{ form.endereco }}
                     </div>
                     <div class="form-group">
-                        <label for="bairro">Bairro</label>
-                        <input type="text" id="bairro" name="bairro">
+                        <label for="bairro">Bairro*</label>
+                        {{ form.bairro }}
                     </div>
                     <div class="form-group">
-                        <label for="cidade">Cidade</label>
-                        <input type="text" id="cidade" name="cidade">
+                        <label for="cidade">Cidade*</label>
+                        {{ form.cidade }}
                     </div>
                     <div class="form-group">
-                        <label for="cep">CEP</label>
-                        <input type="text" id="cep" name="cep">
+                        <label for="cep">CEP*</label>
+                        {{ form.cep }}
                     </div>
                 </div>
 
                 <div class="form-grid">
                     <div class="form-group">
-                        <label for="pontodereferencia">Ponto de referência</label>
-                        <input type="text" id="pontodereferencia" name="pontodereferencia">
+                        <label for="ponto_referencia">Ponto de referência</label>
+                        {{ form.ponto_referencia }}
                     </div>
                     <div class="form-group">
                         <label for="complemento">Complemento</label>
-                        <input type="text" id="complemento" name="complemento">
+                        {{ form.complemento }}
                     </div>
                 </div>
             </div>
@@ -144,25 +166,35 @@
                 <div class="form-grid entrevista">
                     <div class="form-group">
                         <label for="data_visita">Data da Visita</label>
-                        <input type="date">
+                        {{ form.data_visita }}
                     </div>
                 </div>
                 <div class="checkbox-title">Higiene do Ambiente</div>
                 <div class="checkbox-section">
                     <div class="checkbox-options">
                         <label class="questionario-title">Lixo</label>
-                        <label><input type="checkbox" name="lixo" value="queima"> Queima</label>
-                        <label><input type="checkbox" name="lixo" value="enterrar"> Enterra</label>
-                        <label><input type="checkbox" name="lixo" value="coleta"> Coleta</label>
+                        {% for radio in form.lixo %}
+                        {% if radio.choice_label != "---------" %}
+                            <label class="radio-item">
+                            {{ radio.tag }}
+                            <span>{{ radio.choice_label }}</span>
+                            </label>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="checkbox-options">
                         <label class="questionario-title">Limpeza da Casa</label>
-                        <label><input type="checkbox" name="limpeza" value="varre"> Varre</label>
-                        <label><input type="checkbox" name="limpeza" value="lava"> Lava</label>
-                        <label><input type="checkbox" name="limpeza" value="ambos"> Ambos</label>
+                        {% for radio in form.limpeza_casa %}
+                        {% if radio.choice_label != "---------" %}
+                            <label class="radio-item">
+                            {{ radio.tag }}
+                            <span>{{ radio.choice_label }}</span>
+                            </label>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="long-text">
-                        <textarea id="observacoes" name="observacoes" placeholder="Observações..."></textarea>
+                        {{ form.obs_limpeza }}
                     </div>
                 </div>
                 
@@ -170,19 +202,29 @@
                 <div class="checkbox-section">
                     <div class="checkbox-options">
                         <label class="questionario-title">Água</label>
-                            <label><input type="checkbox" name="agua" value="encanada"> Encanada</label>
-                            <label><input type="checkbox" name="agua" value="poco"> Poço</label>
-                            <label><input type="checkbox" name="agua" value="cisterna"> Cisterna</label>
+                        {% for radio in form.agua %}
+                        {% if radio.choice_label != "---------" %}
+                            <label class="radio-item">
+                            {{ radio.tag }}
+                            <span>{{ radio.choice_label }}</span>
+                            </label>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="checkbox-options">
                         <label class="questionario-title">Esgoto</label>
-                            <label><input type="checkbox" name="esgoto" value="rede"> Rede</label>
-                            <label><input type="checkbox" name="esgoto" value="fossa"> Fossa</label>
-                            <label><input type="checkbox" name="esgoto" value="ceuaberto"> Céu Aberto</label>
+                        {% for radio in form.esgoto %}
+                        {% if radio.choice_label != "---------" %}
+                            <label class="radio-item">
+                            {{ radio.tag }}
+                            <span>{{ radio.choice_label }}</span>
+                            </label>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                 
                     <div class="long-text">
-                        <textarea id="observacoes" name="observacoes" placeholder="Observações..."></textarea>
+                        {{ form.obs_saneamento }}
                     </div>
                 </div>
 
@@ -190,22 +232,38 @@
                 <div class="checkbox-section">
                     <div class="checkbox-options">
                     <label class="questionario-title">Moradia I</label>
-                        <label><input type="checkbox" name="moradia" value="propria"> Própria</label>
-                        <label><input type="checkbox" name="moradia" value="alugada"> Alugada</label>
-                        <label><input type="checkbox" name="moradia" value="cedida"> Cedida</label>
+                        {% for radio in form.tipo_moradia %}
+                        {% if radio.choice_label != "---------" %}
+                            <label class="radio-item">
+                            {{ radio.tag }}
+                            <span>{{ radio.choice_label }}</span>
+                            </label>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="checkbox-options">
                     <label class="questionario-title">Moradia II</label>
-                        <label><input type="input" name="moradia"> Numero de comodos</label>
-                        <label><input type="input" name="moradia"> Numero de moradores</label>
-                        <label><input type="checkbox" name="moradia" value="cedida"> Banheiro externo</label>
-                        <label><input type="checkbox" name="moradia" value="cedida"> Banheiro interno</label>
+                    <label>{{ form.num_comodo }} Numero de cômodos</label>
+                    <label> {{ form.num_moradores }} Numero de moradores</label>
+                        {% for radio in form.banheiro %}
+                        {% if radio.choice_label != "---------" %}
+                            <label class="radio-item">
+                            {{ radio.tag }}
+                            <span>{{ radio.choice_label }}</span>
+                            </label>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                     <div class="checkbox-options">
                         <label class="questionario-title">Material de Construção</label>
-                        <label><input type="checkbox" name="construcao" value="alvenaria"> Alvenaria</label>
-                        <label><input type="checkbox" name="construcao" value="taipa"> Taipa</label>
-                        <label><input type="checkbox" name="construcao" value="madeira"> Madeira</label>
+                        {% for radio in form.construcao %}
+                        {% if radio.choice_label != "---------" %}
+                            <label class="radio-item">
+                            {{ radio.tag }}
+                            <span>{{ radio.choice_label }}</span>
+                            </label>
+                        {% endif %}
+                        {% endfor %}
                     </div>
                 </div>
 
@@ -225,11 +283,12 @@
 
                 <div class="form-group obs">
                     <label for="observacoes_gerais">Observações Gerais</label>
-                    <textarea id="observacoes_gerais" name="observacoes_gerais" placeholder="Digite aqui..."></textarea>
+                    {{ form.obs_gerais }}
                 </div>
                 <div class="form-actions">
                     <button type="submit" class="submit-btn">Salvar Cadastro</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>

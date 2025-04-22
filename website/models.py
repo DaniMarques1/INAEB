@@ -4,7 +4,12 @@ class Familia(models.Model):
     # Django cria automaticamente o id como pk: id = models.AutoField(primary_key=True)
     
     # Status de atendimento da família
-    status_atendimento = models.CharField(max_length=20)
+    STATUS_ATENDIMENTO_CHOICES = [
+        ("Ativa", "Ativa"),
+        ("Suspensa", "Suspensa"),
+        ("Aguardando Vaga", "Aguardando Vaga"),
+    ]
+    status_atendimento = models.CharField(max_length=20, choices=STATUS_ATENDIMENTO_CHOICES, default="Aguardando Vaga")
     inicio_atendimento = models.DateField(null=True, blank=True)
     termino_atendimento = models.DateField(null=True, blank=True)
 
@@ -14,15 +19,15 @@ class Familia(models.Model):
     rg = models.CharField(max_length=12)
     cpf = models.CharField(max_length=14)
     data_nascimento = models.DateField()
-    receita_apro = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
-    despesa_apro = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    receita_apro = models.CharField(max_length=50, null=True, blank=True)
+    despesa_apro = models.CharField(max_length=50, null=True, blank=True)
     obs_responsavel = models.CharField(max_length=50, null=True, blank=True)
 
     # Endereço
     endereco = models.CharField(max_length=50)
-    bairro = models.CharField(max_length=50, null=True, blank=True)
-    cidade = models.CharField(max_length=50, null=True, blank=True)
-    cep = models.CharField(max_length=9, null=True, blank=True)
+    bairro = models.CharField(max_length=50)
+    cidade = models.CharField(max_length=50)
+    cep = models.CharField(max_length=9)
     ponto_referencia = models.CharField(max_length=50, null=True, blank=True)
     complemento = models.CharField(max_length=50, null=True, blank=True)
 
@@ -30,21 +35,56 @@ class Familia(models.Model):
     data_visita = models.DateField(null=True, blank=True)
 
     # Higiene do Ambiente
-    lixo = models.CharField(max_length=50, null=True, blank=True)
-    limpeza_casa = models.CharField(max_length=50, null=True, blank=True)
+    LIXO_CHOICES = [
+        ("Queima", "Queima"),
+        ("Enterra", "Enterra"),
+        ("Coleta", "Coleta"),
+    ]
+    lixo = models.CharField(max_length=50, choices=LIXO_CHOICES, null=True, blank=True)
+
+    LIMPEZA_CASA_CHOICES = [
+        ("Varre", "Varre"),
+        ("Lava", "Lava"),
+        ("Ambos", "Ambos"),
+    ]
+    limpeza_casa = models.CharField(max_length=50, choices=LIMPEZA_CASA_CHOICES, null=True, blank=True)
     obs_limpeza = models.CharField(max_length=2000, null=True, blank=True)
 
     # Saneamento Básico
-    agua = models.CharField(max_length=50, null=True, blank=True)
-    esgoto = models.CharField(max_length=50, null=True, blank=True)
-    obs_esgoto = models.CharField(max_length=2000, null=True, blank=True)
+    AGUA_CHOICES = [
+        ("Encanada", "Encanada"),
+        ("Poço", "Poço"),
+        ("Cisterna", "Cisterna"),
+    ]
+    agua = models.CharField(max_length=50, null=True, blank=True, choices=AGUA_CHOICES)
+    ESGOTO_CHOICES = [
+        ("Rede", "Rede"),
+        ("Fossa", "Fossa"),
+        ("Céu Aberto", "Céu Aberto"),
+    ]
+    esgoto = models.CharField(max_length=50, null=True, blank=True, choices=ESGOTO_CHOICES)
+    obs_saneamento = models.CharField(max_length=2000, null=True, blank=True)
 
     # Moradia
-    tipo_moradia= models.CharField(max_length=20, null=True, blank=True)
+    TIPO_MORADIA_CHOICES = [
+        ("Própria", "Própria"),
+        ("Alugada", "Alugada"),
+        ("Cedida", "Cedida"),
+    ]
+    tipo_moradia= models.CharField(max_length=20, null=True, blank=True, choices=TIPO_MORADIA_CHOICES)
     num_comodo = models.IntegerField(null=True, blank=True)
     num_moradores = models.IntegerField(null=True, blank=True)
-    banheiro = models.CharField(max_length=10, null=True, blank=True)
-    construcao = models.CharField(max_length=50, null=True, blank=True)
+    BANHEIRO_CHOICES = [
+        ("Banheiro Externo", "Banheiro Externo"),
+        ("Banheiro Interno", "Banheiro Interno"),
+    ]
+    banheiro = models.CharField(max_length=20, null=True, blank=True, choices=BANHEIRO_CHOICES)
+    CONSTRUCAO_CHOICES = [
+        ("Alvenaria", "Alvenaria"),
+        ("Taipa", "Taipa"),
+        ("Madeira", "Madeira"),
+    ]
+    construcao = models.CharField(max_length=50, null=True, blank=True, choices=CONSTRUCAO_CHOICES)
     
     # Itens diversos (checkboxes)
     televisor = models.BooleanField(null=True, blank=True)
@@ -65,10 +105,10 @@ class Familia(models.Model):
 
 class Telefone(models.Model):
     familia = models.ForeignKey(Familia, on_delete=models.CASCADE)
-    telefone = models.CharField(max_length=11)
+    telefone = models.CharField(max_length=11, null=True, blank=True)
 
     def __str__(self):
-        return f"Tel: {self.telefone} - Cel: {self.celular}"
+        return f"Tel: {self.telefone}"
 
 class Parente(models.Model):
     familia = models.ForeignKey(Familia, on_delete=models.CASCADE)
