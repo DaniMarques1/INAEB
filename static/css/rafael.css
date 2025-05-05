@@ -103,3 +103,16 @@ body {
 .login-button:hover {
     background: #1a4f80;
 }
+
+.msg {
+    margin: 20px;
+    font-weight: bold;
+  }
+  
+  .sucesso {
+    color: green
+  }
+  
+  .erro {
+    color: red
+  }

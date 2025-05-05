@@ -68,20 +68,10 @@ def lista_entregas(request):
     return render(request, "lista_entregas.html")
 
 # @login_required(login_url='/login/')
-def formulario_familias(request):
-
-    dados_formulario = Familia.objects.all()
-
-    context = {
-        'dados_formulario': dados_formulario,
-        'Familia': Familia
-    }
-    return render(request, "formulario_familias.html", context)
-
-# @login_required(login_url='/login/')
 def entregas(request):
     return render(request, "cadastro_entregas.html")
 
+# @login_required(login_url='/login/')
 def atualizar_cestas(request):
     if request.method == 'POST':
         quantity = request.POST.get('doacao_quantidade')
@@ -106,6 +96,7 @@ def atualizar_cestas(request):
     
     return redirect('cadastro_cestas')
 
+# @login_required(login_url='/login/')
 def criar_familia(request):
     if request.method == "POST":
         form = FamiliaForm(request.POST)
@@ -126,6 +117,7 @@ def criar_familia(request):
         "formset": formset,
     })
 
+# @login_required(login_url='/login/')
 def editar_familia(request, pk):
     familia = get_object_or_404(Familia, pk=pk)
     if request.method == "POST":

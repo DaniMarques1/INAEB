@@ -6,11 +6,9 @@ TelefoneFormSet = inlineformset_factory(
     Familia,
     Telefone,
     fields=('telefone',),
-    extra=3,             # até 3 formulários em branco
-    min_num=1,           # no mínimo 1 telefone
-    max_num=3,           # no máximo 3 telefones
-    validate_min=True,   # força a validação de mínimo
-    validate_max=True,   # força a validação de máximo
+    extra=3,
+    max_num=3,
+    validate_max=True,
     can_delete=False
 )
 
