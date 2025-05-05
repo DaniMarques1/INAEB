@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,35 +20,56 @@
 
     <div class="right-column">
         <div class="right-column-content">
+            
             <div class="right-column-buttons-2">
-                <h1>Cestas Básicas Cadastradas: 30</h1>
+                {% for item in estoque_produtos %}
+                    {% if item.produto == "Cesta Básica" %}
+                    <h1>Cestas Básicas Cadastradas: {{ item.qtd_estoque }}</h1>
+                    {% endif %}
+                {% endfor %}
                 <div class="buttons-2-row">
                     <img class="cesta-img" src="{% static 'img/cesta.png' %}" alt="Example" />
                 </div>
-                <div class="buttons-2-row">
-                    <img class="icon-img" src="{% static 'img/minus.png' %}" alt="minus" />
-                    <h2>2</h2>
-                    <img class="icon-img" src="{% static 'img/plus.png' %}" alt="minus" />
+
+                <div class="buttons-2-row">  
+                    <form method="POST" action="{% url 'atualizar_cestas' %}">
+                        {% csrf_token %}   
+                    <input type="number" id="quantity-input" name="doacao_quantidade" value="1" min="1" style="width: 100px; text-align: center; align-items: center;"/>
                 </div>
+
                 <div class="buttons-2-row">
-                    <div class="button-register-1">
+                    <button type="submit" class="button-register-1">
                         + Cadastrar Cesta(s)
-                    </div>
+                    </button>
+                    </form>
                 </div>
+                {% if messages %}
+                {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                        {{ message }}
+                    </li>
+                {% endfor %}
+                {% endif %}
             </div>
+
             <div class="right-column-list-2">
                 <h1>Itens da Cesta Básica</h1>
                 <div class="right-column-list-2-cards">
-                    {% for number in range %}
+                    {% for item in items_cesta %}
                     <div class="card">
                         <div class="card-row">
-                            <h3>Feijão</h3>
+                            <h3>{{ item.produto }}</h3>
                         </div>
                         <div class="card-row">
-                            <img class="produto-img" src="{% static 'img/feijao.jpg' %}" alt="Example" />
+                        {% if item.imagem and item.imagem.url %}
+                            <img class="produto-img" src="{{ item.imagem.url }}" alt="{{ item.nome }}">
+                        {% else %}
+                            <!-- Caso não haja uma imagem para o produto, exiba uma imagem estática padrão (fallback). -->
+                            <img class="produto-img" src="{% static 'img/produto.png' %}" alt="Imagem padrão">
+                        {% endif %}
                         </div>
                         <div class="card-row">
-                            5
+                            {{ item.quantidade }}
                         </div>
                     </div>
                     {% endfor %}

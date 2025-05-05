@@ -40,7 +40,7 @@
 
             <!-- Mensagens de erro/sucesso -->
             {% if messages %}
-                <div class="messages">
+                <div class="msg erro">
                     {% for message in messages %}
                         <p class="{{ message.tags }}">{{ message }}</p>
                     {% endfor %}

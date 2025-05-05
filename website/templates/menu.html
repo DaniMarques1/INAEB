@@ -17,7 +17,7 @@
         </div>
         <div class="logout-container">
             <i class="fa-solid fa-right-from-bracket"></i>
-            <img src="{% static 'img/icone_login2.png' %}" alt="User" class="user-icon" />
+            <a href="/admin"><img src="{% static 'img/icone_login2.png' %}" alt="User" class="user-icon" /></a>
             {% if user.is_authenticated %}
                 {{ user.username }}
                 <form action="{% url 'logout' %}" method="post" style="display: inline;">
@@ -31,6 +31,17 @@
     </header>
 
     <main>
+        
+        <!-- Cartão de Cadastro de Famílias -->
+        <div class="card">
+            <img src="{% static 'img/familia.png' %}" alt="Imagem de Cadastro de Famílias">
+            <h2>Cadastro de Famílias</h2>
+            <div class="button-container">
+                <a href="{% url 'lista_familias' %}"><button class="green">Lista de Famílias</button></a>
+                <a href="{% url 'criar_familia' %}"><button class="blue">Cadastrar Família</button></a>
+            </div>
+        </div>
+        
         <!-- Cartão de Cadastro de Cestas -->
         <div class="card">
             <img src="{% static 'img/cadastro_produtos.png' %}" alt="Imagem de Cadastro de Cestas">
@@ -47,16 +58,6 @@
             <div class="button-container">
                 <a href="{% url 'lista_entregas' %}"><button class="green">Lista de Entregas</button></a>
                 <a href="{% url 'cadastro_entregas' %}"><button class="blue">Cadastrar Entrega</button></a>
-            </div>
-        </div>
-
-        <!-- Cartão de Cadastro de Famílias -->
-        <div class="card">
-            <img src="{% static 'img/familia.png' %}" alt="Imagem de Cadastro de Famílias">
-            <h2>Cadastro de Famílias</h2>
-            <div class="button-container">
-                <a href="{% url 'lista_familias' %}"><button class="green">Lista de Famílias</button></a>
-                <a href="{% url 'formulario_familias' %}"><button class="blue">Cadastrar Família</button></a>
             </div>
         </div>
 

@@ -22,7 +22,7 @@
         </a>
         <ul class="dropdown">
           <li><a href="{% url 'lista_familias' %}">Lista de Famílias</a></li>
-          <li><a href="{% url 'formulario_familias' %}">Cadastrar Família</a></li>
+          <li><a href="{% url 'criar_familia' %}">Cadastrar Família</a></li>
         </ul>
       </li>
       
@@ -39,7 +39,7 @@
     </ul>
 
     <div class="nav-right">
-      <img src="{% static 'img/icone_login2.png' %}" alt="User" class="user-icon" />
+      <a href="/admin"><img src="{% static 'img/icone_login2.png' %}" alt="User" class="user-icon" /></a>
       {% if user.is_authenticated %}
           {{ user.username }}
           <form action="{% url 'logout' %}" method="post" style="display: inline;">
