@@ -147,18 +147,44 @@
                 </div>
             </div>
 
-            <div class="form-section">
-                <div class="h2-form">Familiar 1</div>
-                <div class="form-grid familiar-grid">
-                    <div class="form-group"><label>Nome</label><input type="text"></div>
-                    <div class="form-group"><label>Nascimento</label><input type="date"></div>
-                    <div class="form-group"><label>Parentesco</label><input type="text"></div>
-                    <div class="form-group"><label>Escolaridade/Instrução</label><input type="text"></div>
-                    <div class="form-group"><label>Profissão</label><input type="text"></div>
-                    <div class="form-group"><label>Idade</label><input type="text"></div>
-                    <div class="form-group"><label>Ocupação</label><input type="text"></div>
-                    <div class="form-group full-width"><button type="button" class="add-familiar">➕ Adicionar Familiar</button>
+            {{ parente_formset.management_form }}
+
+            <div id="parente-forms-wrapper">
+                {% for parente in parente_formset %}
+                <div class="form-section parente-form">
+                    <div class="h2-form">Familiar {{ forloop.counter }}</div>
+                    <div class="form-grid familiar-grid">
+                    {{ parente.id }}       
+                    <div class="form-group">{{ parente.nome.label_tag }}{{ parente.nome }}</div>
+                    <div class="form-group">{{ parente.data_nascimento.label_tag }} {{ parente.data_nascimento }}</div>
+                    <div class="form-group">{{ parente.parentesco.label_tag }}   {{ parente.parentesco }}</div>
+                    <div class="form-group">{{ parente.instrucao.label_tag }}    {{ parente.instrucao }}</div>
+                    <div class="form-group">{{ parente.profissao.label_tag }}    {{ parente.profissao }}</div>
+                    <div class="form-group">{{ parente.idade.label_tag }}        {{ parente.idade }}</div>
+                    <div class="form-group">{{ parente.ocupacao.label_tag }}     {{ parente.ocupacao }}</div>
                     </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <button type="button" id="add-parente-btn" class="add-familiar">
+                ➕ Adicionar Familiar
+            </button>
+
+            <div id="empty-parente-form" style="display: none;">
+                <div class="form-section parente-form">
+                    <div class="h2-form">Familiar __NUM__</div>
+                    <div class="form-grid familiar-grid">
+                    {{ parente_formset.empty_form.id }}
+                    <div class="form-group">{{ parente_formset.empty_form.nome.label_tag }}         {{ parente_formset.empty_form.nome }}</div>
+                    <div class="form-group">{{ parente_formset.empty_form.data_nascimento.label_tag }} {{ parente_formset.empty_form.data_nascimento }}</div>
+                    <div class="form-group">{{ parente_formset.empty_form.parentesco.label_tag }}   {{ parente_formset.empty_form.parentesco }}</div>
+                    <div class="form-group">{{ parente_formset.empty_form.instrucao.label_tag }}    {{ parente_formset.empty_form.instrucao }}</div>
+                    <div class="form-group">{{ parente_formset.empty_form.profissao.label_tag }}    {{ parente_formset.empty_form.profissao }}</div>
+                    <div class="form-group">{{ parente_formset.empty_form.idade.label_tag }}        {{ parente_formset.empty_form.idade }}</div>
+                    <div class="form-group">{{ parente_formset.empty_form.ocupacao.label_tag }}     {{ parente_formset.empty_form.ocupacao }}</div>
+                    </div>
+                </div>
             </div>
 
             <div class="form-section">
@@ -270,15 +296,15 @@
 
                 <div class="checkbox-title">Diversos</div>
                     <div class="checkbox-options diversos">
-                        <label><input type="checkbox" name="televisor" value="televisor"> Televisor</label>
-                        <label><input type="checkbox" name="geladeira" value="geladeira"> Geladeira</label>
-                        <label><input type="checkbox" name="celular_smartphone_tablet" value="celular_smartphone_tablet"> Celular/Smartphone/Tablet</label>
-                        <label><input type="checkbox" name="aparelho_som" value="aparelho_som"> Aparelho de Som</label>
-                        <label><input type="checkbox" name="maquina_lavar" value="maquina_lavar"> Maquina de Lavar</label>
-                        <label><input type="checkbox" name="carro_moto" value="carro_moto"> Carro/Moto</label>
-                        <label><input type="checkbox" name="dvd" value="dvd"> DVD </label>
-                        <label><input type="checkbox" name="computador_notebook" value="computador_notebook"> Computador/Notebook</label>
-                        <label><input type="checkbox" name="telefone_internet" value="telefone_internet"> Telefone/Internet</label>
+                    <label for="{{ form.televisor.id_for_label }}">{{ form.televisor }} Televisor</label>
+                    <label for="{{ form.geladeira.id_for_label }}">{{ form.geladeira }} Geladeira</label>
+                    <label for="{{ form.celular_smartphone_tablet.id_for_label }}">{{ form.celular_smartphone_tablet }} Celular/Smartphone/Tablet</label>
+                    <label for="{{ form.aparelho_som.id_for_label }}">{{ form.aparelho_som }} Aparelho de Som</label>
+                    <label for="{{ form.maquina_lavar.id_for_label }}">{{ form.maquina_lavar }} Máquina de Lavar</label>
+                    <label for="{{ form.carro_moto.id_for_label }}">{{ form.carro_moto }} Carro/Moto</label>
+                    <label for="{{ form.dvd.id_for_label }}">{{ form.dvd }} DVD</label>
+                    <label for="{{ form.computador_notebook.id_for_label }}">{{ form.computador_notebook }} Computador/Notebook</label>
+                    <label for="{{ form.telefone_internet.id_for_label }}">{{ form.telefone_internet }} Telefone/Internet</label>
                     </div>
                 </div>
 
@@ -294,5 +320,25 @@
         </div>
     </div>
 </div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const addBtn         = document.getElementById("add-parente-btn");
+      const totalForms     = document.getElementById("id_parente_set-TOTAL_FORMS");
+      const wrapper        = document.getElementById("parente-forms-wrapper");
+      const emptyTemplate  = document.getElementById("empty-parente-form").innerHTML;
+    
+      addBtn.addEventListener("click", () => {
+        const formIndex = parseInt(totalForms.value, 10);
+    
+        let newFormHtml = emptyTemplate.replace(/__prefix__/g, formIndex);
+        newFormHtml = newFormHtml.replace(/__NUM__/g, formIndex + 1);
+    
+        wrapper.insertAdjacentHTML("beforeend", newFormHtml);
+        totalForms.value = formIndex + 1;
+      });
+    });
+    </script>
+
 </body>
 </html>

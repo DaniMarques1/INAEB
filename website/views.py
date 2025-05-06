@@ -4,7 +4,10 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.utils import timezone
-from .forms import FamiliaForm, TelefoneFormSet
+from .forms import FamiliaForm, TelefoneFormSet, ParenteFormSet
+from django.db.models import Value
+from django.db.models.functions import Lower
+from django.db.models import Count
 
 
 def redirect_to_menu(request):
@@ -49,17 +52,38 @@ def cadastro_cestas(request):
 
 # @login_required(login_url='/login/')
 def lista_familias(request):
-    order_field = request.GET.get('order_by', 'nome')
+    order_field   = request.GET.get('order_by', 'nome')
+    status_filtro = request.GET.get('status')
 
     valid_fields = ['nome', 'data_nascimento', '-nome', '-data_nascimento']
     if order_field not in valid_fields:
         order_field = 'nome'
-        
-    dados_familia = Familia.objects.all().prefetch_related('telefone_set').order_by(order_field)
+
+    queryset = (
+        Familia.objects
+        .annotate(total_membros=Count('parente'))     
+    )
+
+    if status_filtro in ['Ativa', 'Suspensa', 'Aguardando Vaga']:
+        queryset = queryset.filter(status_atendimento=status_filtro)
+
+    if 'nome' in order_field:
+        descending = order_field.startswith('-')
+        queryset = queryset.annotate(nome_lower=Lower('nome'))
+        queryset = queryset.order_by('-nome_lower' if descending else 'nome_lower')
+    else:
+        queryset = queryset.order_by(order_field)
+
+    queryset = queryset.prefetch_related('telefone_set')
 
     context = {
-        'dados_familia': dados_familia,
-        'range': range(20)
+        'dados_familia': queryset,
+        'range': range(20),
+        'total_familias': Familia.objects.count(),
+        'total_ativas': Familia.objects.filter(status_atendimento="Ativa").count(),
+        'total_aguardando': Familia.objects.filter(status_atendimento="Aguardando Vaga").count(),
+        'total_suspensas': Familia.objects.filter(status_atendimento="Suspensa").count(),
+        'status_filtro': status_filtro,
     }
     return render(request, "lista_familias.html", context)
 
@@ -99,41 +123,57 @@ def atualizar_cestas(request):
 # @login_required(login_url='/login/')
 def criar_familia(request):
     if request.method == "POST":
-        form = FamiliaForm(request.POST)
-        formset = TelefoneFormSet(request.POST)
-        if form.is_valid() and formset.is_valid():
+        form        = FamiliaForm(request.POST)
+        telefones   = TelefoneFormSet(request.POST)
+        parentes    = ParenteFormSet(request.POST)
+
+        if form.is_valid() and telefones.is_valid() and parentes.is_valid():
             familia = form.save()
-            formset.instance = familia
-            formset.save()
+
+            telefones.instance = familia
+            telefones.save()
+
+            parentes.instance = familia
+            parentes.save()
+
             messages.success(request, "Família cadastrada com sucesso!")
             return redirect("lista_familias")
-        else:
-            messages.error(request, "Por favor, preencha todos os campos marcados com asterisco (*) .")
+        messages.error(request, "Por favor, corrija os erros abaixo.")
     else:
-        form = FamiliaForm()
-        formset = TelefoneFormSet()
-    return render(request, "formulario_familias.html", {
-        "form": form,
-        "formset": formset,
-    })
+        form      = FamiliaForm()
+        telefones = TelefoneFormSet()
+        parentes  = ParenteFormSet()
+
+    return render(
+        request,
+        "formulario_familias.html",
+        {"form": form, "formset": telefones, "parente_formset": parentes},
+    )
+
 
 # @login_required(login_url='/login/')
 def editar_familia(request, pk):
     familia = get_object_or_404(Familia, pk=pk)
+
     if request.method == "POST":
-        form = FamiliaForm(request.POST, instance=familia)
-        formset = TelefoneFormSet(request.POST, instance=familia)
-        if form.is_valid() and formset.is_valid():
+        form      = FamiliaForm(request.POST, instance=familia)
+        telefones = TelefoneFormSet(request.POST, instance=familia)
+        parentes  = ParenteFormSet(request.POST, instance=familia)
+
+        if form.is_valid() and telefones.is_valid() and parentes.is_valid():
             form.save()
-            formset.save()
+            telefones.save()
+            parentes.save()
             messages.success(request, "Dados atualizados com sucesso!")
             return redirect("lista_familias")
-        else:
-            messages.error(request, "Por favor, preencha todos os campos marcados com asterisco (*) .")
+        messages.error(request, "Por favor, corrija os erros abaixo.")
     else:
-        form = FamiliaForm(instance=familia)
-        formset = TelefoneFormSet(instance=familia)
-    return render(request, "formulario_familias.html", {
-        "form": form,
-        "formset": formset,
-    })
+        form      = FamiliaForm(instance=familia)
+        telefones = TelefoneFormSet(instance=familia)
+        parentes  = ParenteFormSet(instance=familia)
+
+    return render(
+        request,
+        "formulario_familias.html",
+        {"form": form, "formset": telefones, "parente_formset": parentes},
+    )
