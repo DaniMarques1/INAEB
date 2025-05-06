@@ -27,15 +27,18 @@
                     </div></a>
                 </div>
                 <div class="buttons-1-row">
-                    <div class="button-info-1">
-                        Famílias Ativas: 33
-                    </div>
-                    <div class="button-info-1">
-                        Famílias Aguardando: 3
-                    </div>
-                    <div class="button-info-1">
-                        Famílias Suspensas: 9
-                    </div>
+                    <a href="{% url 'lista_familias' %}" class="button-info-1 {% if not status_filtro %}ativo{% endif %}">
+                        Todas ({{ total_familias }})
+                    </a>
+                    <a href="?status=Ativa" class="button-info-1 {% if status_filtro == 'Ativa' %}ativo{% endif %}">
+                        Ativas ({{ total_ativas }})
+                    </a>
+                    <a href="?status=Aguardando Vaga" class="button-info-1 {% if status_filtro == 'Aguardando Vaga' %}ativo{% endif %}">
+                        Aguardando ({{ total_aguardando }})
+                    </a>
+                    <a href="?status=Suspensa" class="button-info-1 {% if status_filtro == 'Suspensa' %}ativo{% endif %}">
+                        Suspensas ({{ total_suspensas }})
+                    </a>
                 </div>
             </div>
             <div class="right-column-list-1"> 
@@ -52,12 +55,12 @@
                 <table>
                 <thead>
                     <tr>
-                    <th></th>
+                    <th>Editar</th>
                     <th>Responsável <a href="?order_by=nome">🔺</a> <a href="?order_by=-nome">🔻</a></th>
                     <th>Nascimento <a href="?order_by=data_nascimento">🔺</a> <a href="?order_by=-data_nascimento">🔻</a></th>
                     <th>Membros</th>
                     <th>Endereço</th>
-                    <th>Telefone</th>
+                    <th>Telefone 1</th>
                     <th>Status</th>
                     </tr>
                 </thead>
@@ -68,7 +71,7 @@
                     <td><a href="{{ registro.id }}/editar">📋</a></td>
                     <td>{{ registro.nome }}</td>
                     <td>{{ registro.data_nascimento|date:"d/m/Y" }}</td>
-                    <td>6</td>
+                    <td>{{ registro.parente_set.count }}</td>
                     <td>{{ registro.endereco }}</td>
                     <td>{{ registro.telefone_set.all.0.telefone|default:"—" }}</td>
                     <td>{{ registro.status_atendimento }}</td>
