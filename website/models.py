@@ -12,6 +12,7 @@ class Familia(models.Model):
     status_atendimento = models.CharField(max_length=20, choices=STATUS_ATENDIMENTO_CHOICES, default="Aguardando Vaga")
     inicio_atendimento = models.DateField(null=True, blank=True)
     termino_atendimento = models.DateField(null=True, blank=True)
+    qtd_membros = models.IntegerField(null=True, blank=True, default=0)
 
     # Dados do Responsável
     data_entrevista = models.DateField(null=True, blank=True)
@@ -105,7 +106,7 @@ class Familia(models.Model):
 
 class Telefone(models.Model):
     familia = models.ForeignKey(Familia, on_delete=models.CASCADE)
-    telefone = models.CharField(max_length=11, null=True, blank=True)
+    telefone = models.CharField(max_length=20, null=True, blank=True)
 
     def __str__(self):
         return f"Tel: {self.telefone}"

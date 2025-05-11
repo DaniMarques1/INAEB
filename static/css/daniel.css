@@ -473,10 +473,12 @@ table th {
 .entrevista{
   display: inline;
   justify-content: center;
+  text-align: center;
 }
 
 .entrevista input{
   max-width: 300px;
+  text-align: center;
 }
 
 .status{

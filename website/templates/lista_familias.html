@@ -71,7 +71,7 @@
                     <td><a href="{{ registro.id }}/editar">📋</a></td>
                     <td>{{ registro.nome }}</td>
                     <td>{{ registro.data_nascimento|date:"d/m/Y" }}</td>
-                    <td>{{ registro.parente_set.count }}</td>
+                    <td>{{ registro.qtd_membros }}</td>
                     <td>{{ registro.endereco }}</td>
                     <td>{{ registro.telefone_set.all.0.telefone|default:"—" }}</td>
                     <td>{{ registro.status_atendimento }}</td>
