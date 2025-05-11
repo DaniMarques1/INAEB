@@ -26,20 +26,22 @@
                         + Cadastrar Família
                     </div></a>
                 </div>
-                <div class="buttons-1-row">
-                    <a href="{% url 'lista_familias' %}" class="button-info-1 {% if not status_filtro %}ativo{% endif %}">
+                    <div class="buttons-1-row">
+                    <a href="{% url 'lista_familias' %}{% if order_field %}?order_by={{ order_field }}{% endif %}" class="button-info-1 {% if not status_filtro %}ativo{% endif %}">
                         Todas ({{ total_familias }})
                     </a>
-                    <a href="?status=Ativa" class="button-info-1 {% if status_filtro == 'Ativa' %}ativo{% endif %}">
+
+                    <a href="{% url 'lista_familias' %}?status=Ativa{% if order_field %}&order_by={{ order_field }}{% endif %}" class="button-info-1 {% if status_filtro == 'Ativa' %}ativo{% endif %}">
                         Ativas ({{ total_ativas }})
                     </a>
-                    <a href="?status=Aguardando Vaga" class="button-info-1 {% if status_filtro == 'Aguardando Vaga' %}ativo{% endif %}">
+
+                    <a href="{% url 'lista_familias' %}?status=Aguardando Vaga{% if order_field %}&order_by={{ order_field }}{% endif %}" class="button-info-1 {% if status_filtro == 'Aguardando Vaga' %}ativo{% endif %}">
                         Aguardando ({{ total_aguardando }})
                     </a>
-                    <a href="?status=Suspensa" class="button-info-1 {% if status_filtro == 'Suspensa' %}ativo{% endif %}">
+                    <a href="{% url 'lista_familias' %}?status=Suspensa{% if order_field %}&order_by={{ order_field }}{% endif %}" class="button-info-1 {% if status_filtro == 'Suspensa' %}ativo{% endif %}">
                         Suspensas ({{ total_suspensas }})
                     </a>
-                </div>
+                    </div>
             </div>
             <div class="right-column-list-1"> 
 
@@ -55,13 +57,25 @@
                 <table>
                 <thead>
                     <tr>
-                    <th>Editar</th>
-                    <th>Responsável <a href="?order_by=nome">🔺</a> <a href="?order_by=-nome">🔻</a></th>
-                    <th>Nascimento <a href="?order_by=data_nascimento">🔺</a> <a href="?order_by=-data_nascimento">🔻</a></th>
-                    <th>Membros</th>
-                    <th>Endereço</th>
-                    <th>Telefone 1</th>
-                    <th>Status</th>
+                        <th>Editar</th>
+                        <th>
+                        Responsável
+                        <a href="?order_by=nome{% if status_filtro %}&status={{ status_filtro }}{% endif %}">🔺</a>
+                        <a href="?order_by=-nome{% if status_filtro %}&status={{ status_filtro }}{% endif %}">🔻</a>
+                        </th>
+                        <th>
+                        Nascimento
+                        <a href="?order_by=data_nascimento{% if status_filtro %}&status={{ status_filtro }}{% endif %}">🔺</a>
+                        <a href="?order_by=-data_nascimento{% if status_filtro %}&status={{ status_filtro }}{% endif %}">🔻</a>
+                        </th>
+                        <th>
+                        Membros
+                        <a href="?order_by=qtd_membros{% if status_filtro %}&status={{ status_filtro }}{% endif %}">🔺</a>
+                        <a href="?order_by=-qtd_membros{% if status_filtro %}&status={{ status_filtro }}{% endif %}">🔻</a>
+                        </th>
+                        <th>Endereço</th>
+                        <th>Telefone 1</th>
+                        <th>Status</th>
                     </tr>
                 </thead>
                 

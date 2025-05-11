@@ -48,7 +48,7 @@ class FamiliaForm(forms.ModelForm):
             "status_atendimento": forms.RadioSelect(),  
             "inicio_atendimento": forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d"),
             "termino_atendimento": forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d"),
-            "qtd_membros": forms.NumberInput(attrs={"min": 0}),
+            "qtd_membros": forms.NumberInput(attrs={"min": 1}),
             "data_entrevista": forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d"),
             "data_nascimento": forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d"),
             "data_visita": forms.DateInput(attrs={"type": "date"}, format="%Y-%m-%d"),

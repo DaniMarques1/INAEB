@@ -56,7 +56,7 @@ def lista_familias(request):
     order_field   = request.GET.get('order_by', 'nome')
     status_filtro = request.GET.get('status')
 
-    valid_fields = ['nome', 'data_nascimento', '-nome', '-data_nascimento']
+    valid_fields = ['nome', 'data_nascimento', 'qtd_membros', '-nome', '-data_nascimento', '-qtd_membros']
     if order_field not in valid_fields:
         order_field = 'nome'
 
@@ -85,6 +85,7 @@ def lista_familias(request):
         'total_aguardando': Familia.objects.filter(status_atendimento="Aguardando Vaga").count(),
         'total_suspensas': Familia.objects.filter(status_atendimento="Suspensa").count(),
         'status_filtro': status_filtro,
+        'order_field': order_field,
     }
     return render(request, "lista_familias.html", context)
 
