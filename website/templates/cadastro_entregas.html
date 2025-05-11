@@ -18,10 +18,68 @@
     </div>
 
     <div class="right-column">
-        <p>Botão Cadastro de Entregas</p>
-        <p>Cadastro das Entregas</p>
-    </div>
+        <div class="right-column-content">
+           <form method="post">
+            {% csrf_token %}
+            {{ formset.management_form }}
 
+            <div class="right-column-list-4">
+                <h1>Cadastrar Entrega</h1>
+
+                <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Responsável</th>
+                        <th>Item</th>
+                        <th>Data</th>
+                        <th>Quantidade</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for form in formset %}
+                    <tr>
+                        <td>{{ form.familia }}</td>
+                        <td>{{ form.produto }}</td>
+                        <td>{{ form.data_doacao }}</td>
+                        <td>{{ form.quantidade }}</td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+                <!-- botão JS para clonar a última linha e criar novos formulários -->
+                <button type="button" id="add-row">+</button>
+                </div>
+
+                <br>
+                <button type="submit" class="button-register-1 green">Cadastrar Entrega(s)</button>
+                {% if messages %}   
+                <ul class="msg erro">
+                    {% for message in messages %}
+                    <span class="{{ message.tags }}">{{ message }}</span>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            </form>
+        </div>
+    </div>
 </div>
+<script>
+    document.getElementById("add-row").addEventListener("click", () => {
+  const total = document.getElementById("id_form-TOTAL_FORMS");
+  const tbody = document.querySelector("table tbody");
+  const last = tbody.lastElementChild;
+  const clone = last.cloneNode(true);
+
+  // atualiza índices (form-0 → form-1, etc.)
+  const newIndex = parseInt(total.value, 10);
+  clone.innerHTML = clone.innerHTML.replace(/form-(\d)-/g, `form-${newIndex}-`);
+  tbody.appendChild(clone);
+  total.value = newIndex + 1;
+});
+</script>
 </body>
 </html>

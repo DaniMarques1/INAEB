@@ -20,6 +20,6 @@ urlpatterns = [
     path("cadastro/familias/<int:pk>/editar/", editar_familia, name="editar_familia"),
 
     # ENTREGAS
-    path("cadastro/entregas/", entregas, name="cadastro_entregas"),
+    path("cadastro/entregas/", cadastro_entregas, name="cadastro_entregas"),
     path("cadastro/lista_entregas/", lista_entregas, name="lista_entregas"),
 ]

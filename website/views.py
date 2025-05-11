@@ -4,10 +4,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.utils import timezone
-from .forms import FamiliaForm, TelefoneFormSet, ParenteFormSet
-from django.db.models import Value
+from .forms import FamiliaForm, TelefoneFormSet, ParenteFormSet, EntregaFormSet
 from django.db.models.functions import Lower
-from django.db.models import Count
+from django.db.models import Count, Min, Max
+from datetime import date, datetime
+from django.db import transaction
 
 
 def redirect_to_menu(request):
@@ -33,11 +34,11 @@ def login_view(request):
     
     return render(request, 'login.html')
 
-# @login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def menu(request):
     return render(request, "menu.html")
 
-# @login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def cadastro_cestas(request):
 
     estoque_produtos = Produto.objects.all()
@@ -50,7 +51,7 @@ def cadastro_cestas(request):
     }
     return render(request, "cadastro_cestas.html", context)
 
-# @login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def lista_familias(request):
     order_field   = request.GET.get('order_by', 'nome')
     status_filtro = request.GET.get('status')
@@ -87,15 +88,96 @@ def lista_familias(request):
     }
     return render(request, "lista_familias.html", context)
 
-# @login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def lista_entregas(request):
-    return render(request, "lista_entregas.html")
+    aggs = Entrega.objects.aggregate(
+        earliest=Min('data_doacao'),
+        latest=Max('data_doacao'),
+    )
 
-# @login_required(login_url='/login/')
-def entregas(request):
-    return render(request, "cadastro_entregas.html")
+    raw_min = aggs['earliest']
+    raw_max = aggs['latest']
 
-# @login_required(login_url='/login/')
+    if raw_min:
+        min_date = raw_min.date() if hasattr(raw_min, 'date') else raw_min
+    else:
+        min_date = date.today()
+
+    if raw_max:
+        max_date = raw_max.date() if hasattr(raw_max, 'date') else raw_max
+    else:
+        max_date = date.today()
+
+    min_date_str = min_date.isoformat()
+    max_date_str = max_date.isoformat()
+
+    start_str = request.GET.get('start_date', min_date_str)
+    end_str = request.GET.get('end_date', max_date_str)
+
+    try:
+        start_date = datetime.fromisoformat(start_str).date()
+    except ValueError:
+        start_date = min_date
+
+    try:
+        end_date = datetime.fromisoformat(end_str).date()
+    except ValueError:
+        end_date = max_date
+
+    entregas = Entrega.objects.filter(
+        data_doacao__date__range=[start_date, end_date]
+    )
+
+    order_field = request.GET.get('order_by', '-data_doacao')
+    descending  = order_field.startswith('-')
+    field_name  = order_field.lstrip('-')
+
+    if field_name == 'familia':
+        entregas = entregas.annotate(familia_nome_lower=Lower('familia__nome'))
+        entregas = entregas.order_by(
+            '-familia_nome_lower' if descending else 'familia_nome_lower'
+        )
+    else:
+        entregas = entregas.order_by(order_field)
+
+    context = {
+        'dados_entregas': entregas,
+        'min_date':       min_date_str,
+        'max_date':       max_date_str,
+        'start_date':     start_str,
+        'end_date':       end_str,
+    }
+    return render(request, 'lista_entregas.html', context)
+
+@login_required(login_url='/login/')
+def cadastro_entregas(request):
+    FormSet = EntregaFormSet
+
+    if request.method == "POST":
+        formset = FormSet(request.POST)
+
+        if formset.is_valid():
+            with transaction.atomic():
+                entregas = formset.save()
+                for entrega in entregas:
+                    produto = entrega.produto
+                    produto.qtd_estoque -= entrega.quantidade
+                    produto.save(update_fields=["qtd_estoque"])
+
+            messages.success(request, "Entrega(s) cadastrada(s) com sucesso!")
+            return redirect("lista_entregas")
+
+        if formset.non_form_errors():
+            for msg in formset.non_form_errors():
+                messages.error(request, msg)
+        else:
+            messages.error(request, "Preencha todos os campos antes de salvar.")
+    else:
+        formset = FormSet(queryset=Entrega.objects.none())
+
+    return render(request, "cadastro_entregas.html", {"formset": formset})
+
+@login_required(login_url='/login/')
 def atualizar_cestas(request):
     if request.method == 'POST':
         quantity = request.POST.get('doacao_quantidade')
@@ -120,7 +202,7 @@ def atualizar_cestas(request):
     
     return redirect('cadastro_cestas')
 
-# @login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def criar_familia(request):
     if request.method == "POST":
         form        = FamiliaForm(request.POST)
@@ -138,7 +220,7 @@ def criar_familia(request):
 
             messages.success(request, "Família cadastrada com sucesso!")
             return redirect("lista_familias")
-        messages.error(request, "Por favor, corrija os erros abaixo.")
+        messages.error(request, "Preencha todos os campos marcados com asterisco (*).")
     else:
         form      = FamiliaForm()
         telefones = TelefoneFormSet()
@@ -150,8 +232,7 @@ def criar_familia(request):
         {"form": form, "formset": telefones, "parente_formset": parentes},
     )
 
-
-# @login_required(login_url='/login/')
+@login_required(login_url='/login/')
 def editar_familia(request, pk):
     familia = get_object_or_404(Familia, pk=pk)
 

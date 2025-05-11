@@ -8,14 +8,6 @@
 
     <ul class="nav-items">
       <li>
-        <a href="{% url 'cadastro_cestas' %}">
-        <img src="{% static 'img/cadastro_produtos.png' %}" alt="Cestas" />
-        <h2>Cestas</h2>
-        </a>
-      </li>
-      
-
-      <li>
         <a href="{% url 'lista_familias' %}">
         <img src="{% static 'img/familia.png' %}" alt="Famílias" />
         <h2>Famílias</h2>
@@ -24,6 +16,13 @@
           <li><a href="{% url 'lista_familias' %}">Lista de Famílias</a></li>
           <li><a href="{% url 'criar_familia' %}">Cadastrar Família</a></li>
         </ul>
+      </li>
+      
+      <li>
+        <a href="{% url 'cadastro_cestas' %}">
+        <img src="{% static 'img/cadastro_produtos.png' %}" alt="Cestas" />
+        <h2>Cestas</h2>
+        </a>
       </li>
       
       <li>

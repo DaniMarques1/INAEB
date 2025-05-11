@@ -18,7 +18,59 @@
     </div>
 
     <div class="right-column">
-        <p>Lista de Entregas</p>
+        <div class="right-column-content">
+            <div class="right-column-buttons-3">
+                <a href="{% url 'cadastro_entregas' %}">
+                <div class="button-register-1">
+                    +Cadastrar Entrega
+                </div>
+                </a>
+            </div>
+            <div class="right-column-list-3">
+                <h1>Registro de Cestas Doadas</h1>
+                <div class="date-filter">
+                <form method="get" class="date-filter__form">
+                    <h2>Escolha o Período</h2>
+                    De
+                    <label><input type="date" name="start_date" min="{{ min_date }}" max="{{ max_date }}" value="{{ start_date }}"></label>
+                    até
+                    <label><input type="date" name="end_date" min="{{ min_date }}" max="{{ max_date }}" value="{{ end_date }}"></label>
+
+                    <button type="submit">Filtrar</button>
+                </form>
+                </div>
+                
+                    {% if messages %}
+                    <ul class="msg sucesso">
+                        {% for message in messages %}
+                        <span class="{{ message.tags }}">{{ message }}</span>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+                <div class="table-container medium">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th> Responsável <a href="?order_by=familia">🔺</a> <a href="?order_by=-familia">🔻</a></th>
+                                <th> Item </th>
+                                <th> Data </th>
+                                <th> Quantidade </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for entrega in dados_entregas %}
+                            <tr>
+                                <td>{{entrega.familia}}</td>
+                                <td>{{entrega.produto}}</td>
+                                <td>{{entrega.data_doacao|date:"d/m/Y"}}</td>
+                                <td>{{entrega.quantidade}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 
 </div>
